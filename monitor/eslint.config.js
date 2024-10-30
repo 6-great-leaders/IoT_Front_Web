@@ -10,5 +10,13 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs["flat/essential"],
-  {files: ["**/*.vue"], languageOptions: {parserOptions: {parser: tseslint.parser}}},
+  {files: ["**/*.vue"],
+    languageOptions: {parserOptions: {parser: tseslint.parser} },
+    rules: {
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-empty-object-type": "warn",
+        "vue/multi-word-component-names": "warn",
+        "@typescript-eslint/triple-slash-reference": "warn"
+      }
+},
 ];

@@ -10,9 +10,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set working directory to monitor
-        run: echo "Working in the monitor directory"
-
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:

@@ -10,6 +10,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set working directory to monitor
+        working-directory: ./monitor
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -17,9 +20,16 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./monitor
 
       - name: Lint code
         run: npm run lint
+        working-directory: ./monitor
+
+      - name: TypeScript check
+        run: npm run type-check
+        working-directory: ./monitor
 
       - name: Build project
         run: npm run build
+        working-directory: ./monitor

@@ -17,7 +17,9 @@ export default [
         "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/no-empty-object-type": "warn",
         "vue/multi-word-component-names": "warn",
-        "@typescript-eslint/triple-slash-reference": "warn"
+        "no-undef": "warn",
+        "@typescript-eslint/triple-slash-reference": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn",
       }
     }
   ];  

@@ -80,8 +80,8 @@ const logout = () => {
 
 .navbar-right .logout {
   cursor: pointer;
-  color: #2ecc71; /* Green text */
-  font-weight: bold;
+  color: red;
+  font-weight: 500;
 }
 </style>
 

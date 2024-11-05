@@ -2,6 +2,7 @@
   <div class="login-container">
     <div class="login-box">
       <h1>Scan IT</h1>
+      <h2>Admin panel</h2>
       <form @submit.prevent="submitForm">
         <input type="text" placeholder="Username" v-model="username" class="input-field" />
         <input type="password" placeholder="Password" v-model="password" class="input-field" />
@@ -45,14 +46,20 @@ const submitForm = () => {
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   color: #2ecc71; /* Green text */
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0px 0px 20px 0px;
 }
 
 .input-field {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 5px 0;
   border: 1px solid #ccc;
   border-radius: 10px; /* Rounded input fields */
 }
@@ -60,6 +67,7 @@ h1 {
 .login-button {
   width: 100%;
   padding: 10px;
+  margin-top: 20px;
   background-color: #2ecc71; /* Green button */
   color: white;
   border: none;

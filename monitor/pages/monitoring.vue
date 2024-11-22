@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import NavBar from '~/components/NavBar.vue';
 
 const cards = ref([
@@ -37,6 +37,42 @@ const cards = ref([
   { id: '011', status: 'Inactive', battery: 55 },
   { id: '012', status: 'Active', battery: 75 }
 ]);
+
+let ws;
+
+onMounted(() => {
+  // Initialize WebSocket
+  ws = new WebSocket('ws://localhost:3001'); // Remplacez l'URL par celle de votre backend WebSocket
+
+  ws.onopen = () => {
+    console.log('WebSocket connecté');
+  };
+
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+
+    if (data.event === 'turnover_change') {
+      console.log('Turnover Change:', data.data);
+    } else if (data.event === 'active_scanners_change') {
+      console.log('Active Scanners Change:', data.data.active_count);
+    }
+  };
+
+  ws.onclose = () => {
+    console.log('WebSocket déconnecté');
+  };
+
+  ws.onerror = (error) => {
+    console.error('Erreur WebSocket:', error);
+  };
+});
+
+onUnmounted(() => {
+  // Fermer la connexion WebSocket lors du démontage
+  if (ws) {
+    ws.close();
+  }
+});
 </script>
 
 <style scoped>

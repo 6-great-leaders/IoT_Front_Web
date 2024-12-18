@@ -5,11 +5,10 @@
 
     <!-- Small cards grid -->
     <div class="p-5 grid grid-cols-2 gap-4">
-      <div v-for="(card, index) in cards" :key="index" class="m-1 p-6 bg-white text-center rounded-lg h-52 flex justify-center items-center" :class="{
-          'row-span-2 h-full': card.title === 'Active scanners',}">
-        <div class="flex flex-col space-y-4">
+      <div v-for="(card, index) in cards" :key="index" class="m-1 p-6 bg-white text-center rounded-lg h-56">
+        <div class="flex flex-col justify-middle align-center">
           <h3 class="text-xl font-semibold">{{ card.title }}</h3>
-          <p class="text-5xl font-semibold" :class="{'text-green-500': card.title === 'Active scanners'}">{{ card.content }}</p>
+          <p class="text-5xl font-semibold">{{ card.content }}</p>
         </div>
       </div>
     </div>
@@ -22,6 +21,7 @@ import NavBar from '~/components/NavBar.vue';
 let ws;
 const cards = ref([
   {title : 'Active scanners', content: 0},
+  {title : 'Number of articles', content: 0},
   {title : 'Number of scanners', content: 0},
   {title : 'Suggested articles', content: 0},
   {title : 'Suggested articles scanned', content: 0},
@@ -38,10 +38,11 @@ async function fetchBIData() {
     console.log(data);
 
     cards.value[0].content = data.nbActiveScanner;
-    cards.value[1].content = 11;
-    cards.value[2].content = data.suggestedArticles;
-    cards.value[3].content = data.suggestedArticlesBought;
-    cards.value[4].content = data.turnover;
+    cards.value[1].content = data.nbArticles;
+    cards.value[2].content = 11;
+    cards.value[3].content = data.suggestedArticles;
+    cards.value[4].content = data.suggestedArticlesBought;
+    cards.value[5].content = data.turnover;
   } catch (error) {
     console.error('Erreur lors de la récupération des données des scanettes:', error);
   }

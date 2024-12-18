@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <h1>Scan IT</h1>
+      <h1 class="text-3xl font-semibold text-[#2ecc71]">Scan IT</h1>
       <h2>Admin panel</h2>
       <form @submit.prevent="submitForm">
         <input type="text" placeholder="Username" v-model="username" class="input-field" />
@@ -43,11 +43,6 @@ const submitForm = () => {
   border-radius: 15px; /* Rounded box */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-}
-
-h1 {
-  margin-bottom: 0px;
-  color: #2ecc71; /* Green text */
 }
 
 h2 {

@@ -1,20 +1,26 @@
 <template>
-  <div>
+  <div class="bg-gray-100 h-screen">
     <!-- Add the NavBar -->
     <NavBar />
 
     <!-- Card container -->
-    <div class="card-grid">
-      <nuxt-card v-for="(card, index) in cards" :key="index" class="card-item">
-        <div class="card-content">
-          <img src="/images/scanette.png" alt="Scanette Image" class="card-image" />
-          <div class="card-info">
-            <div>ID: {{ card.id }}</div>
-            <div>Status: {{ card.status }}</div>
-            <div>Battery: {{ card.battery }}%</div>
+    <div class="p-5 grid grid-cols-4 gap-4">
+      <div v-for="(card, index) in cards" :key="index"
+      class="m-1 p-6 bg-white flex align-center rounded-lg">
+        <div class="flex">
+          <img src="/images/scannerGPS.png" alt="Scanette Image" class="w-28 h-28" />
+          <div class="flex flex-col">
+            <div class="text-lg font-semibold">SGPS-{{ card.id }}</div>
+            <div class="font-medium text-sm mb-6">{{ card.battery }}% charged</div>
+            <span class="text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border" :class="{
+                    'bg-green-100 text-green-800 border-green-400': card.status === 'ACTIVE',
+                    'bg-orange-100 text-orange-800 border-orange-400': card.status === 'IDLE',
+                    'bg-gray-100 text-gray-800 border-gray-400': card.status === 'OFF',
+                    'bg-red-100 text-red-800 border-red-400': card.status === 'ERROR',
+                }">{{ card.status }}</span>
           </div>
         </div>
-      </nuxt-card>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +30,6 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import NavBar from '~/components/NavBar.vue';
 
 const cards = ref([
-  { id: '001', status: 'OFF', battery: 85 },
   { id: '002', status: 'OFF', battery: 60 },
   { id: '003', status: 'OFF', battery: 90 },
   { id: '004', status: 'OFF', battery: 40 },
@@ -34,8 +39,7 @@ const cards = ref([
   { id: '008', status: 'OFF', battery: 30 },
   { id: '009', status: 'OFF', battery: 100 },
   { id: '010', status: 'OFF', battery: 20 },
-  { id: '011', status: 'OFF', battery: 55 },
-  { id: '012', status: 'OFF', battery: 75 }
+  { id: '001', status: 'OFF', battery: 85 },
 ]);
 
 let ws;
@@ -133,37 +137,4 @@ onUnmounted(() => {
   }
 });
 </script>
-
-<style scoped>
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
-
-.card-item {
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-radius: 15px; /* Rounded corners */
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.card-content {
-  display: flex;
-}
-
-.card-image {
-  width: 60px;
-  height: 60px;
-  margin-right: 20px;
-}
-
-.card-info {
-  display: flex;
-  flex-direction: column;
-}
-</style>
 

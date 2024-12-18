@@ -1,0 +1,44 @@
+name: Deploy NuxtJS to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Déclencher sur les pushs vers la branche principale
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Cloner le dépôt
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Étape 2 : Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Vous pouvez ajuster la version de Node.js selon vos besoins
+
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        working-directory: monitor # Spécifie le répertoire de base
+        run: npm ci
+
+      # Étape 4 : Construire le projet
+      - name: Build project
+        working-directory: monitor # Spécifie le répertoire de base
+        run: npm run build
+
+  deploy:
+      environment:
+        name: github-pages
+        url: "http://scanit.adaba.tech"
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
+  

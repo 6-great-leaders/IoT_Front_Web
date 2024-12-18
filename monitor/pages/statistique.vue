@@ -39,7 +39,7 @@ async function fetchBIData() {
 
     cards.value[0].content = data.nbActiveScanner;
     cards.value[1].content = 11;
-    cards.value[2].content = data.suggestedArticles;
+    cards.value[2].content = 3;
     cards.value[3].content = data.suggestedArticlesBought;
     cards.value[4].content = data.turnover;
   } catch (error) {
@@ -63,15 +63,16 @@ onMounted(async () => {
 
     if (data.event === 'turnover_change') {
       console.log('Turnover Change:', data.data);
+      cards.value[4].content = data.data;
     } else if (data.event === 'active_scanners_change') {
       console.log('Active Scanners Change:', data.data.active_count);
       cards.value[0].content = data.data.active_count;
     } else if (data.event === 'nb_articles_change') {
       console.log(`Number of Articles Change - Scanner ID: ${data.data.scanner_id}, Old Value: ${data.data.old_value}, New Value: ${data.data.new_value}`);
-      cards.value[1].content = data.data.new_value;
     } else if (data.event === 'nb_articles_ai_change') {
-      console.log(`AI Articles Change - Scanner ID: ${data.data.scanner_id}, Old Value: ${data.data.old_value}, New Value: ${data.data.new_value}`);
-      cards.value[2].content = data.data.new_value;
+      console.log(data);
+      console.log(`AI Articles Change - Scanner ID: ${data}, Old Value: ${data.data.old_value}, New Value: ${data.data.new_value}`);
+      cards.value[3].content = data.total_ai_article;
     } else if (data.event === 'scanner_state_change') { // Nouveau bloc
       console.log(`Scanner State Change - Scanner ID: ${data.data.scanner_id}, Old State: ${data.data.old_state}, New State: ${data.data.new_state}`);
     }

@@ -41,7 +41,7 @@ async function fetchBIData() {
     cards.value[1].content = 11;
     cards.value[2].content = 3;
     cards.value[3].content = data.suggestedArticlesBought;
-    cards.value[4].content = data.turnover;
+    cards.value[4].content = "" + Math.floor(data.turnover) + "€";
   } catch (error) {
     console.error('Erreur lors de la récupération des données des scanettes:', error);
   }
@@ -61,9 +61,9 @@ onMounted(async () => {
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data);
 
-    if (data.event === 'turnover_change') {
+    if (data.event === 'global_turnover_change') {
       console.log('Turnover Change:', data.data);
-      cards.value[4].content = data.data;
+      cards.value[4].content = "" + data.data.global_turnover + "€";
     } else if (data.event === 'active_scanners_change') {
       console.log('Active Scanners Change:', data.data.active_count);
       cards.value[0].content = data.data.active_count;
@@ -72,7 +72,7 @@ onMounted(async () => {
     } else if (data.event === 'nb_articles_ai_change') {
       console.log(data);
       console.log(`AI Articles Change - Scanner ID: ${data}, Old Value: ${data.data.old_value}, New Value: ${data.data.new_value}`);
-      cards.value[3].content = data.total_ai_article;
+      cards.value[3].content = data.data.total_ai_articles;
     } else if (data.event === 'scanner_state_change') { // Nouveau bloc
       console.log(`Scanner State Change - Scanner ID: ${data.data.scanner_id}, Old State: ${data.data.old_state}, New State: ${data.data.new_state}`);
     }

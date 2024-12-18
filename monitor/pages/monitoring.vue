@@ -50,11 +50,22 @@ async function fetchScannerData() {
     const data = await response.json();
 
     // Initialisation des cartes avec les données récupérées
+    /*cards.value = cards.value.map((card) => {
+      if (card.id === '001') {
+        return {
+          ...card, // Copie les autres propriétés existantes
+          status: scanner.state, // Mise à jour de l'état (state)
+          battery: Math.floor(Math.random() * 51) + 50
+        };
+      }
+      return card; // Ne change rien pour les autres scanettes
+    });*/
     cards.value = data.map((scanner) => ({
       id: scanner.id,
       status: scanner.state,
       battery: Math.floor(Math.random() * 51) + 50 // Génère une batterie aléatoire (50-100%)
     }));
+    console.log(cards.value)
   } catch (error) {
     console.error('Erreur lors de la récupération des données des scanettes:', error);
   }
@@ -88,7 +99,7 @@ onMounted(async () => {
     console.log(`Scanner State Change - Scanner ID: ${data.data.scanner_id}, Old State: ${data.data.old_state}, New State: ${data.data.new_state}`);
 
     // Exemple : mise à jour de l'affichage des scanettes
-    const scannerId = data.data.scanner_id;
+    // const scannerId = data.data.scanner_id;
     const newState = data.data.new_state;
     console.log(newState);
 

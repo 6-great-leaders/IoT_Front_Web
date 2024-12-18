@@ -64,7 +64,7 @@ const editableProducts = ref({});
 const fetchProducts = async () => {
   try {
 //  const data = await $fetch("http://localhost:4000/monitoring/all_articles");
-    const data = await $fetch("http://34.79.197.67/monitoring/all_articles");
+    const data = await $fetch("http://146.148.5.29:4000/monitoring/all_articles");
     console.log("Produits récupérés :", data);
     products.value = data || [];
     products.value.forEach((product) => {

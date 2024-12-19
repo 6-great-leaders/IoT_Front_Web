@@ -79,7 +79,7 @@ const updateProduct = async (id) => {
   try {
     const { x, y } = editableProducts.value[id];
 //  await $fetch(`http://localhost:4000/monitoring/modif_article/${id}`, {
-    await $fetch(`https://34.79.197.67/monitoring/modif_article/${id}`, {
+    await $fetch(`https://146.148.5.29:4000/monitoring/modif_article/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ x, y }),
